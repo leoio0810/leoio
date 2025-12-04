@@ -14,6 +14,50 @@ int main() {
 	printf("%d\n", a);//打印结果为9
 }
 二、指针声明
-1.int a;           char b;           double c;
-  int *p1 = &a;    char *p2=&b;      double *c=&c;
+1.int a;                   
+  int *p1 = &a;
+  char b;  
+  char *p2=&b;
+  double c;     
+  double *c=&c;
+三、指针运算
+示例
+#include<stdio.h>
+int main() {
+	int a = 5;
+	int* p;
+	p = &a;
+	
+	printf("Address p is %p\n", p);//Address p is 0000003C23CFF864
+	printf("size of the integer is %d bytes.\n", (unsigned)sizeof(int));//size of the integer is 4 bytes.
+	printf("Address p+2 is %p.\n", p + 2);//Address p+2 is 0000003C23CFF86C.加了两个整数型所需位置
+    printf("Value at address p+1 is %d", *(p + 1));//Value at address p+1 is -858993460,这是随机的垃圾值
+}
+四、指针是强类型的
+    1.因为指针不仅是保存地址，也起解引用的作用来访问地址并修改里面的值。
+#include<stdio.h>
+int main() {
+	int a = 1025;
+	int* p;
+	p = &a;
+	
+	char* p0;
+	p0 = (char*)p;//类型转换
+	printf("Size of char is %d bytes.\n",(unsigned)sizeof(char));
+	printf("Address = %p,value = %d \n", p0, *p0);//打印的值是1，因为1025的二进制表示为00000000 00000000 00000100 00000001，解引用时只看一个字节即00000001，结果为1
+	printf("Address = %p,value = %d\n", p0 + 1, *(p0 + 1));//地址p0大1，即一个字符型；00000100代表4，打印的值为4
+}
+    2.通用指针类型void
+#include<stdio.h>
+int main() {
+	int a = 1025;
+	int* p;
+	p = &a;
+	
+	void* p0;
+	p0 = p;
+	printf("Address = %p", p0);
+}
+      不指向特定数据类型，导致不能直接解引用
+    
 
