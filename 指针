@@ -1,0 +1,19 @@
+一、指针概念
+    计算机内存（memory）中，整型占据4字节（byte）内存，浮点型占据4字节，字符型占据1字节。每个字节占据一个地址（address），例如声明一个整型变量a，a的地址为205，a的值（value)为5，那么a占据205-208。
+    当我们用p来表示一个指针（pointer），p指向a的地址，计算机先到这个地址，再去对a进行操作。Pointers are variables that store address of variables.
+示例
+#include<stdio.h>
+int main() {
+	int a = 5;
+	int* p;//int *p等价
+	p = &a;
+	printf("%d\n", a);//打印结果为5，a的值
+	printf("%p\n", p);//打印结果为000000B1083FF9B4，十六进制，即p的值，a的地址
+	printf("%d\n", *p);//打印结果为5，*p表示对p进行解引用，即去p表示的地址，获得这个地址所储存的值
+	*p=9;//对p这个地址所储存的变量的值重新赋值为9
+	printf("%d\n", a);//打印结果为9
+}
+二、指针声明
+1.int a;           char b;           double c;
+  int *p1 = &a;    char *p2=&b;      double *c=&c;
+
