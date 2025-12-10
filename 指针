@@ -14,6 +14,8 @@ int main() {
 	printf("%d\n", a);//打印结果为9
 }
 
+
+
 二、指针声明（declare）
    1.int a;                   
      int *p1 = &a;
@@ -50,6 +52,8 @@ int main() {
     printf("Value at address p+1 is %d", *(p + 1));//Value at address p+1 is -858993460,这是随机的垃圾值
 }
 
+
+
 四、指针是强类型的
     1.因为指针不仅是保存地址，也起解引用的作用来访问地址并修改里面的值。
 #include<stdio.h>
@@ -77,6 +81,8 @@ int main() {
 }
       不指向特定数据类型，导致不能直接解引用
 
+
+
 五、指向指针的指针Pointer to pointer
 
 示例
@@ -100,6 +106,8 @@ int main() {
 	(*q)++;//写*q++会有一个“可能操作顺序不对”的警告
 	printf("%p", p);//0000004763CFFAC8，比p加了一个整数型，即4个字节
 }
+
+
 
 六、函数传值和传引用
 
@@ -140,6 +148,7 @@ int main() {
 	printf("a = %d\n", a);//结果为a= 11
 }
 传引用可以节省内存空间
+
 
 七、指针和数组（array）
 示例
@@ -251,12 +260,19 @@ int main() {
        B[i]指的是B[i]这个数组的基地址即B[i][0]
     (3)c[i][j][k]=*(c[i][j]+k)
                  =*(*(c[i]+j)+k)
-九、动态内存分配
+
+
+
+八、动态内存分配
    1.堆即动态内存，使用堆意味着动态内存分配
    2.使用内存之后要释放，否则会导致内存泄漏，使用malloc之后应该调用free
    3.malloc返回一个指针指向了分配给我们的内存块的第一个字节的地址如果malloc找不到空闲的内存，会返回null
    4.calloc接受两个参数，第一个是特定元素数量，第二个是类型的大小，calloc会初始化，malloc不会
    5.realloc接受两个参数，指向已分配内存的起始地址的指针，新内存的大小
+     用法：e.g.int* Q = (int*)realloc(P, 2 * n * sizeof(int));
+               int* B = (int*)realloc(NULL,sizeof(int));//这种用法相当于malloc
+               int* P = (int*)realloc(A,0);//这种用法相当于free（P）
+
 示例
 #include<stdio.h>
 #include<stdlib.h>
@@ -279,5 +295,12 @@ int main(void) {
 	free(p);
 	return 0;
 }
+
+
+
+九、内存泄漏
+    申请了内存，在使用完之后没有释放内存
+
+十、函数返回指针
     
 
