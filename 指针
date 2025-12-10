@@ -120,7 +120,7 @@ int main() {
   Code（text）储存指令，例如上述例子中的自增语句。
   Static/Global储存静态变量和全局变量（可以在任何函数中访问和修改）
   Stack（栈）存放局部变量
-  Heap（堆）程序运行时在堆中为其分配更多内存
+  Heap（堆）程序运行时在堆中为其分配更多内存,也叫做动态内存
 2.栈帧Stack frame
   （1）内存中会为了每个函数在栈上划分出来一个区域，即栈帧
        栈有大小，要防止溢出
@@ -251,8 +251,33 @@ int main() {
        B[i]指的是B[i]这个数组的基地址即B[i][0]
     (3)c[i][j][k]=*(c[i][j]+k)
                  =*(*(c[i]+j)+k)
-
-
-
+九、动态内存分配
+   1.堆即动态内存，使用堆意味着动态内存分配
+   2.使用内存之后要释放，否则会导致内存泄漏，使用malloc之后应该调用free
+   3.malloc返回一个指针指向了分配给我们的内存块的第一个字节的地址如果malloc找不到空闲的内存，会返回null
+   4.calloc接受两个参数，第一个是特定元素数量，第二个是类型的大小，calloc会初始化，malloc不会
+   5.realloc接受两个参数，指向已分配内存的起始地址的指针，新内存的大小
+示例
+#include<stdio.h>
+#include<stdlib.h>
+int main(void) {
+	int a;
+	int* p;
+	p = (int*)malloc(sizeof(int));//分配一个整型大小的内存，malloc返回一个void类型的指针，指向这块内存的第一个地址，（int*）是类型转换
+	if (p == NULL) {
+    printf(stderr, "malloc failed\n");
+    return 1;
+    }//空指针检查
+    *p = 10;
+	printf("%p\n", p);
+	printf("%d\n", *p);
+	free(p);
+	p = (int*)malloc(20 * sizeof(int));//分配一个连续的而且可以存放20个整型的内存
+	p[2] = 99;
+	printf("%p\n", p);
+	printf("%d\n", *(p+2));
+	free(p);
+	return 0;
+}
     
 
