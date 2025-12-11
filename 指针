@@ -302,5 +302,17 @@ int main(void) {
     申请了内存，在使用完之后没有释放内存
 
 十、函数返回指针
-    
+    main函数在栈底，运行的函数在栈顶，当一个函数运行之后会被清空内存，然后给下一个函数，那么上一个函数中的指针失效。栈上自动释放，而堆上需要显式释放，用malloc在堆上获得内存
+  示例
+#include<stdio.h>
+int Add(int a, int b) {
+	return a + b;
+}
+int main() {
+	int c = 0;
+	int (*p)(int, int);//声明p是指向一个返回类型为int，两个参数类型也为int的函数指针
+	p = &Add;//声明p是指向函数Add的指针
+	c = (*p)(2, 8);
+	printf("%d", c);
+}
 
